@@ -1,3 +1,8 @@
+import Input from "../UI/Inputs/Input";
+import IconCart from "../UI/Icons/IconCart";
+import IconUser from "../UI/Icons/IconUser";
+import Divider from "../UI/Divider";
+
 function HeaderUser() {
   const pages = [
     { id: 1, page: "Home" },
@@ -17,11 +22,19 @@ function HeaderUser() {
           ))}
         </nav>
         <nav className="flex flex-row gap-4">
-          <input type="text" placeholder="teste input" />
-          <p> teste</p>
-          <p>teste</p>
+          <Input
+            placeholder="O que você está procurando?"
+            className="h-8 w-65 text-sm bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4"
+          />
+          <button>
+            <IconCart />
+          </button>
+          <button>
+            <IconUser />
+          </button>
         </nav>
       </header>
+      <Divider className="my-6" />
     </>
   );
 }

@@ -53,10 +53,10 @@ const InputImage = ({
           />
           <img className="object-contain" src={image} />
           <button
-            className="w-25 bg-red-400 p-2 rounded-sm"
+            className="w-25 bg-red-400 p-2 rounded-sm hover:bg-red-300"
             onClick={handleRemoveImage}
           >
-            Remover 
+            Remover
           </button>
         </div>
       </div>

@@ -7,18 +7,19 @@ function VerticalBar() {
   ];
 
   return (
-    <>
-      <div className="flex justify-start flex-col ml-20 mt-14">
-        <h1 className="font-semibold">Gerenciar minha Loja</h1>
-        <nav className="flex flex-col px-12">
-          {options.map((option, index) => (
-            <div key={index}>
-              <p className="text-[#828282] hover:text-black">{option.option}</p>
-            </div>
-          ))}
-        </nav>
-      </div>
-    </>
+    <div className="flex flex-col w-full max-w-[250px] px-6 md:ml-10 md:mt-10">
+      <h1 className="font-semibold mb-4">Gerenciar minha Loja</h1>
+      <nav className="flex flex-col gap-2">
+        {options.map((option, index) => (
+          <div key={index}>
+            <p className="text-gray-500 hover:text-black cursor-pointer">
+              {option.option}
+            </p>
+          </div>
+        ))}
+      </nav>
+    </div>
   );
 }
+
 export default VerticalBar;

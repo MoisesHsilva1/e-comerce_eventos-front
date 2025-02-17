@@ -3,6 +3,7 @@ interface InputProps {
   typeInput?: "text" | "email" | "password" | "number";
   value?: string;
   placeholder?: string;
+  className?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -12,12 +13,13 @@ const Input = ({
   value,
   placeholder,
   onChange,
+  className = "w-[330px] h-[50px] bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4",
 }: InputProps) => {
   return (
     <>
       <label htmlFor="label">{label}</label>
       <input
-        className="w-[330px] h-[50px] bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4"
+        className={className}
         type={typeInput}
         value={value}
         placeholder={placeholder}
