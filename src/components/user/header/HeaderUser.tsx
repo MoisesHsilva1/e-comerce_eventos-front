@@ -1,7 +1,7 @@
-import Input from "../UI/Inputs/Input";
-import IconCart from "../UI/Icons/IconCart";
-import IconUser from "../UI/Icons/IconUser";
-import Divider from "../UI/Divider";
+import Input from "../../UI/Inputs/Input";
+import IconCart from "../../UI/Icons/IconCart";
+import IconUser from "../../UI/Icons/IconUser";
+import Divider from "../../UI/Divider";
 
 function HeaderUser() {
   const pages = [
@@ -13,18 +13,18 @@ function HeaderUser() {
   return (
     <>
       <header className="flex justify-between m-6">
-        Logo
-        <nav className="flex flex-row gap-8">
+        <img className="w-12 h-full rounded-full" src="/assets/logo.png" alt="logo" />
+        <nav className="flex flex-row gap-8 mt-3">
           {pages.map((page, index) => (
             <div key={index}>
               <h2 className="hover:bg-[#7D8184]">{page.page}</h2>
             </div>
           ))}
         </nav>
-        <nav className="flex flex-row gap-4">
+        <nav className="flex flex-row gap-6">
           <Input
             placeholder="O que você está procurando?"
-            className="h-8 w-65 text-sm bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4"
+            className="h-8 w-65 mt-2 text-sm bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4"
           />
           <button>
             <IconCart />

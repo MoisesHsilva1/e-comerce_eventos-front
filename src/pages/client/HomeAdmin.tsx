@@ -1,4 +1,4 @@
-import HeaderClient from "../../components/headers/HeaderClient";
+import HeaderClient from "../../components/client/header/HeaderClient";
 import VerticalBar from "../../components/client/verticalBar/VerticalBar";
 import RegisterProduct from "../../components/client/registerProduct/RegisterProduct";
 

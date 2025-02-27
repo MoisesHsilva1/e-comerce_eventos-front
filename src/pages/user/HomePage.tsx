@@ -1,11 +1,13 @@
 import Home from "../../components/user/home/Home";
-import Header from "../../components/headers/HeaderUser";
+import HeaderUser from "../../components/user/header/HeaderUser";
+import Footer from "../../components/user/footer/Footer";
 
 function HomePage() {
   return (
     <>
-      <Header />
+      <HeaderUser />
       <Home />
+      <Footer/>
     </>
   );
 }

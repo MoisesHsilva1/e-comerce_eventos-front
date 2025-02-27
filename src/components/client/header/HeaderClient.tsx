@@ -1,5 +1,5 @@
 function HeaderClient() {
-  const items_header = [{ item: "logo" }];
+  const items_header = [{ logo: "/assets/logo.png" }];
 
   return (
     <>
@@ -10,7 +10,7 @@ function HeaderClient() {
         <nav className="flex flex-wrap gap-4 md:gap-8">
           {items_header.map((item, index) => (
             <div key={index}>
-              <h2 className="text-lg">{item.item}</h2>
+              <img className="w-12 h-full rounded-full" src={item.logo} alt="logo" />
             </div>
           ))}
         </nav>
