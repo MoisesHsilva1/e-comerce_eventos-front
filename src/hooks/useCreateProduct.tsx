@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useCreateProduct = () => {
   const [response, setResponse] = useState(null);
@@ -7,10 +7,6 @@ const useCreateProduct = () => {
   const [loading, setLoading] = useState(false);
 
   const apiUrl = import.meta.env.VITE_CREATE_PRODUCT_API_URL || "";
-
-  // useEffect(() => {
-  //   console.log(apiUrl);
-  // });
 
   const fetchProductData = async (productData: Record<string, any>) => {
     setLoading(true);
