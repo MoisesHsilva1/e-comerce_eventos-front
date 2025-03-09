@@ -4,6 +4,7 @@ interface InputProps {
   value?: string;
   placeholder?: string;
   className?: string;
+  pattern?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,6 +14,7 @@ const Input = ({
   value,
   placeholder,
   onChange,
+  pattern,
   className = "w-[330px] h-[50px] bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4",
 }: InputProps) => {
   return (
@@ -24,6 +26,8 @@ const Input = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        required
+        pattern={pattern}
       />
     </>
   );

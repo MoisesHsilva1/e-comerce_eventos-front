@@ -1,13 +1,13 @@
 import { useState } from "react";
 import IconUpdateFile from "../Icons/IconUploadFile";
 
-const InputImage = ({
-  label,
-  placeholder,
-}: {
+interface InputImage {
   label?: string;
   placeholder?: string;
-}) => {
+  value?: string;
+}
+
+const InputImage = ({ label, placeholder, value }: InputImage) => {
   const [image, setImage] = useState<string | undefined>(undefined);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,9 +50,11 @@ const InputImage = ({
             id="inputImage"
             className="hidden"
             onChange={handleImageChange}
+            required
           />
           <img className="object-contain" src={image} />
           <button
+            value={value}
             className="w-25 bg-red-400 p-2 rounded-sm hover:bg-red-300"
             onClick={handleRemoveImage}
           >

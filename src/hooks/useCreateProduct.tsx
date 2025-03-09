@@ -8,7 +8,7 @@ const useCreateProduct = () => {
 
   const apiUrl = import.meta.env.VITE_CREATE_PRODUCT_API_URL || "";
 
-  const fetchProductData = async (productData: Record<string, any>) => {
+  const sendProductData = async (productData: Record<string, any>) => {
     setLoading(true);
     setError(null);
 
@@ -25,7 +25,7 @@ const useCreateProduct = () => {
     }
   };
 
-  return { response, loading, error, fetchProductData };
+  return { response, loading, error, sendProductData };
 };
 
 export default useCreateProduct;

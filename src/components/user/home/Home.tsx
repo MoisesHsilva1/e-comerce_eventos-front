@@ -2,6 +2,7 @@ import Divider from "../../UI/Divider";
 import SortByProducts from "../../UI/SortByProducts";
 import ProductCard from "../../UI/ProductCard";
 import Button from "../../UI/buttons/Button";
+import useAllProducts from "../../../hooks/useAllProducts";
 
 function Home() {
   const products = [
