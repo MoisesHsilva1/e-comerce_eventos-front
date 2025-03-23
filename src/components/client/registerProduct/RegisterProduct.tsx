@@ -99,11 +99,6 @@ function RegisterProduct() {
 
   const labelRegisterNumber = [
     { id: "price", label: "Preço", placeholder: "Ex.: R$100,00" },
-    {
-      id: "amount",
-      label: "Quantidade do produto",
-      placeholder: "Ex.: 100 unidades ",
-    },
   ];
 
   return (

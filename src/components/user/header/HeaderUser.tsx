@@ -2,24 +2,26 @@ import Input from "../../UI/Inputs/Input";
 import IconCart from "../../UI/Icons/IconCart";
 import IconUser from "../../UI/Icons/IconUser";
 import Divider from "../../UI/Divider";
+import { useNavigate } from "react-router";
 
 function HeaderUser() {
-  const pages = [
-    { id: 1, page: "Home" },
-    { id: 2, page: "Contato" },
-    { id: 3, page: "Sobre" },
-    { id: 4, page: "Login" },
-  ];
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="flex justify-between m-6">
-        <img className="w-12 h-full rounded-full" src="/assets/logo.png" alt="logo" />
+        <img
+          className="w-12 h-full rounded-full"
+          src="/assets/logo.png"
+          alt="logo"
+        />
         <nav className="flex flex-row gap-8 mt-3">
-          {pages.map((page, index) => (
-            <div key={index}>
-              <h2 className="hover:bg-[#7D8184]">{page.page}</h2>
-            </div>
-          ))}
+          <a className="hover:text-gray-600" onClick={() => navigate("/")}>
+            Home
+          </a>
+          <a className="hover:text-gray-600">Contato</a>
+          <a className="hover:text-gray-600">Sobre</a>
+          <a className="hover:text-gray-600">Login</a>
         </nav>
         <nav className="flex flex-row gap-6">
           <Input

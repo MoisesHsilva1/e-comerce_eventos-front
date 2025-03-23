@@ -2,7 +2,7 @@ interface ProductCardProps {
   image?: string;
   alt?: string;
   nameProduct?: string;
-  price?: string;
+  price?: number;
   className?: string;
 }
 
@@ -21,7 +21,7 @@ const ProductCard = ({
         </div>
         <div className={`mt-4 ${className}`}>
           <h1>{nameProduct}</h1>
-          <p>{price}</p>
+          <p>R$ {price}</p>
         </div>
       </div>
     </>
