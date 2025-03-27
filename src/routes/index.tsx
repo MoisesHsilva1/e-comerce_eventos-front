@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import HomePage from "../pages/user/HomePage";
-import HomeAdmin from "../pages/client/HomeAdmin";
-import ProductStockAdmin from "../pages/client/ProductStockAdmin";
+import HomeAdmin from "../pages/Admin/HomeAdmin";
+import ProductStockAdmin from "../pages/Admin/ProductStockAdmin";
 
 function AppRoutes() {
   return (

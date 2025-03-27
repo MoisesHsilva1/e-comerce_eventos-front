@@ -27,25 +27,34 @@ function ProductStock() {
                 </tr>
               </thead>
               <tbody>
-                {product.map((item, index) => (
-                  <tr key={index} className="odd:bg-white even:bg-gray-100">
-                    <td className="border border-gray-300 p-3">{item.name}</td>
-                    <td className="border border-gray-300 p-3">
-                      {item.category}
-                    </td>
-                    <td className="border border-gray-300 p-3">{}</td>
-                    <td className="border border-gray-300 p-3">
-                      R$ {item.price}
-                    </td>
-                    <td className="border border-gray-300 p-3">
-                      <Button
-                        type="button"
-                        className="bg-red-500 hover:bg-red-700 "
-                        textButton="Excluir"
-                      ></Button>
-                    </td>
-                  </tr>
-                ))}
+                {product
+                  .filter(
+                    (item, index, self) =>
+                      index === self.findIndex((p) => p.name === item.name)
+                  )
+                  .map((item, index) => {
+                    return (
+                      <tr key={index} className="odd:bg-white even:bg-gray-100">
+                        <td className="border border-gray-300 p-3">
+                          {item.name}
+                        </td>
+                        <td className="border border-gray-300 p-3">
+                          {item.category}
+                        </td>
+                        <td className="border border-gray-300 p-3"></td>
+                        <td className="border border-gray-300 p-3">
+                          R$ {item.price}
+                        </td>
+                        <td className="border border-gray-300 p-3">
+                          <Button
+                            type="button"
+                            className="bg-red-500 hover:bg-red-700 "
+                            textButton="Excluir"
+                          ></Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>
