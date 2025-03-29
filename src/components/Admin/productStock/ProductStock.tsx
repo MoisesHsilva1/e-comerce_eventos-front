@@ -2,7 +2,7 @@ import useAllProducts from "../../../hooks/useAllProducts";
 import Button from "../../UI/buttons/Button";
 
 function ProductStock() {
-  const { product, loading } = useAllProducts();
+  const { products, isLoading } = useAllProducts();
 
   return (
     <section className="flex justify-center items-center -my-35 ml-80 p-6 bg-[#FAFAFA] rounded-xl w-200">
@@ -10,7 +10,7 @@ function ProductStock() {
         <h1 className="text-2xl font-bold mb-4 -mt-2 text-center">
           Estoque de Produtos
         </h1>
-        {loading ? (
+        {isLoading ? (
           <div className="text-center text-gray-500">Carregando...</div>
         ) : (
           <div className="overflow-x-auto">
@@ -27,7 +27,7 @@ function ProductStock() {
                 </tr>
               </thead>
               <tbody>
-                {product
+                {products
                   .filter(
                     (item, index, self) =>
                       index === self.findIndex((p) => p.name === item.name)

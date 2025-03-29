@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 interface Product {
@@ -10,31 +10,17 @@ interface Product {
 }
 
 function useAllProducts() {
-  const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState<Product[]>([]);
-
   const apiUrl = import.meta.env.VITE_GET_PRODUCT_API_URL;
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
+  const { data: products = [], error, isLoading } = useQuery<Product[], Error>({
+    queryKey: ["getProducts"], 
+    queryFn: async () => {
       const { data: response } = await axios.get(apiUrl);
+      return response && Array.isArray(response.products) ? response.products : [];
+    },
+  });
 
-      if (response && Array.isArray(response.products)) {
-        setProduct(response.products);
-      }
-    } catch (error: any) {
-      console.error("Erro ao buscar produtos:", error.message);
-      setProduct([]);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return { loading, product };
+  return { products, error, isLoading };
 }
 
 export default useAllProducts;

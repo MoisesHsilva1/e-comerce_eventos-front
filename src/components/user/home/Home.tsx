@@ -8,7 +8,7 @@ import useAllProducts from "../../../hooks/useAllProducts";
 function Home() {
   const [allProducts, setAllProducts] = useState(4);
   const [bestProducts, setBestProducts] = useState(4);
-  const { product, loading } = useAllProducts();
+  const { products, isLoading } = useAllProducts();
 
   const handleBestSellers = () => {
     setBestProducts((prev) => prev + 2);
@@ -26,7 +26,7 @@ function Home() {
             <SortByProducts text="Este mês" />
             <div className="flex justify-between">
               <h1 className="text-4xl font-semibold">Mais vendidos</h1>
-              {allProducts < product.length && (
+              {allProducts < products.length && (
                 <Button
                   textButton="Ver todos"
                   className=" w-44 h-10 mr-14"
@@ -36,8 +36,8 @@ function Home() {
             </div>
           </article>
           <figure className="flex justify-start items-start overflow-y-auto flex-row m-4 gap-6">
-            {loading && <h1>Carregando...</h1>}
-            {product.slice(0, bestProducts).map((item, index) => (
+            {isLoading && <h1>Carregando...</h1>}
+            {products.slice(0, bestProducts).map((item, index) => (
               <ProductCard
                 key={index}
                 alt=""
@@ -54,8 +54,8 @@ function Home() {
             </div>
           </article>
           <figure className="flex justify-start items-start flex-wrap overflow-x-scroll m-4 gap-6">
-            {loading && <h1>Carregando...</h1>}
-            {product.slice(0, allProducts).map((item, index) => (
+            {isLoading && <h1>Carregando...</h1>}
+            {products.slice(0, allProducts).map((item, index) => (
               <ProductCard
                 key={index}
                 alt=""

@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 function RegisterProduct() {
   const [inputsValues, setInputsValues] = useState<Record<string, string>>({});
-  const { response, loading, error, sendProductData } = useCreateProduct();
+  const { data, createProduct, error   } = useCreateProduct();
 
   const toastsProducts = () => {
     {
@@ -17,20 +17,14 @@ function RegisterProduct() {
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: false,
-          pauseOnHover: true, 
+          pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
         });
     }
     {
-      loading &&
-        toast.info("Enviando...", {
-          position: "top-center",
-        });
-    }
-    {
-      response &&
+      data &&
         toast.success("Produto cadastrado com sucesso!!", {
           position: "top-center",
           autoClose: 5000,
@@ -73,10 +67,9 @@ function RegisterProduct() {
       ...inputsValues,
       price:
         Number(inputsValues.price?.replace("R$", "").replace(",", ".")) || 0,
-      amount: Number(inputsValues.amount),
     };
 
-    sendProductData(formattedData);
+   createProduct(formattedData)
   };
 
   const labelsRegisterText = [
@@ -146,7 +139,6 @@ function RegisterProduct() {
             onClick={toastsProducts}
             textButton="Cadastrar Produto"
             value="Submit"
-            disabled={loading}
           />
           <ToastContainer />
         </form>

@@ -1,31 +1,34 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
-
-const useCreateProduct = () => {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  const apiUrl = import.meta.env.VITE_CREATE_PRODUCT_API_URL || "";
 
   const sendProductData = async (productData: Record<string, any>) => {
-    setLoading(true);
-    setError(null);
+    const apiUrl = import.meta.env.VITE_CREATE_PRODUCT_API_URL || "";
 
-    try {
-      const res = await axios.post(apiUrl, productData, {
-        headers: { "Content-Type": "application/json" },
-      });
-      setResponse(res.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Erro ao cadastrar produto");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    const res = await axios.post(apiUrl, productData, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    return res.data;
   };
 
-  return { response, loading, error, sendProductData };
+const useCreateProduct = () => {
+    const mutation =  useMutation({
+      mutationFn: sendProductData,
+      onSuccess(data: any) {
+        console.log("Product created successfully", data);
+      },
+      onError(error: any) {
+        console.error("Error creating product", error);
+      },
+    })
+
+    return {
+      createProduct: mutation.mutate,
+      isError: mutation.isError,
+      error: mutation.error,
+      data: mutation.data,
+    };
+
 };
 
 export default useCreateProduct;
