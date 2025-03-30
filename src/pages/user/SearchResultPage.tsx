@@ -1,14 +1,14 @@
-import Home from "../../components/user/home/Home";
 import HeaderUser from "../../components/user/header/HeaderUser";
 import Footer from "../../components/user/footer/Footer";
+import SearchResult from "../../components/user/home/SearchResult";
 
-const HomePage = () => {
+const SearchResultPage = () => {
   return (
     <>
       <HeaderUser />
-      <Home />
-      <Footer/>
+      <SearchResult />
+      <Footer />
     </>
   );
-}
-export default HomePage;
+};
+export default SearchResultPage;

@@ -1,14 +1,14 @@
+import ProductStock from "../../components/Admin/productStock/ProductStock";
 import HeaderClient from "../../components/Admin/header/HeaderClient";
 import VerticalBar from "../../components/Admin/verticalBar/VerticalBar";
-import RegisterProduct from "../../components/Admin/registerProduct/RegisterProduct";
 
-function HomeAdmin() {
+const ProductStockPage = () => {
   return (
     <>
       <HeaderClient />
       <VerticalBar />
-      <RegisterProduct />
+      <ProductStock />
     </>
   );
 }
-export default HomeAdmin;
+export default ProductStockPage;

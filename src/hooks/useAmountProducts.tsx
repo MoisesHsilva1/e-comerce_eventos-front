@@ -1,8 +1,9 @@
 import axios from "axios";
+import { getAmountProductUrl } from "../utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 function useAmountProducts(name?: string) {
-  const apiUrl = import.meta.env.VITE_GET_AMOUNT_PRODUCT_API_URL;
+  const apiUrl = getAmountProductUrl();
 
   const {
     data: amountProducts,
