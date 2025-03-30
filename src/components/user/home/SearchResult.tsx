@@ -1,12 +1,19 @@
 import { useLocation } from "react-router";
+import useSearchProductName from "../../../hooks/useSearchProductName";
 
 function SearchResult() {
   const location = useLocation();
+  const searchProduct = location.state.searchTerm || "";
+  const { products } = useSearchProductName(searchProduct);
 
   return (
-    <div className="flex flex-col gap-4">
-        <h1> {location.state.product} </h1>
-    </div>
+    <>
+      {products.map((item, index) => 
+        <div className="text-black" key={index}>
+          {item.description}
+        </div>
+      )}
+    </>
   );
 }
-export default SearchResult;    
+export default SearchResult;

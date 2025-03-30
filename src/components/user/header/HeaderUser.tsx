@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import useSearchProductName from "../../../hooks/useSearchProductName";
 import Input from "../../UI/Inputs/Input";
 import IconCart from "../../UI/Icons/IconCart";
 import IconUser from "../../UI/Icons/IconUser";
@@ -9,10 +8,6 @@ import { useState } from "react";
 function HeaderUser() {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
-  const { products } = useSearchProductName(search);
-
-  console.log(products);
-  console.log("valor input", search);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -20,7 +15,7 @@ function HeaderUser() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.key === "Enter" &&
-      navigate("/pesquisa", { state: { searchProduct: products } });
+      navigate("/pesquisa", { state: { searchTerm: search }, replace: true });
   };
 
   return (
