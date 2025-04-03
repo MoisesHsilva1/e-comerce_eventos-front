@@ -5,9 +5,16 @@ import Button from "../../UI/buttons/Button";
 import useCreateProduct from "../../../hooks/useCreateProduct";
 import { ToastContainer, toast } from "react-toastify";
 
+type Product = {
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+};
+
 function RegisterProduct() {
   const [inputsValues, setInputsValues] = useState<Record<string, string>>({});
-  const { data, createProduct, error   } = useCreateProduct();
+  const { data, createProduct, error } = useCreateProduct();
 
   const toastsProducts = () => {
     {
@@ -63,13 +70,16 @@ function RegisterProduct() {
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formattedData = {
-      ...inputsValues,
-      price:
-        Number(inputsValues.price?.replace("R$", "").replace(",", ".")) || 0,
+    const formattedData: Product = {
+      name: inputsValues.name,
+      description: inputsValues.description,
+      category: inputsValues.category,
+      price: Number(inputsValues.price.replace(",", ".")),
     };
+    4;
 
-   createProduct(formattedData)
+    createProduct(formattedData);
+    setInputsValues({});
   };
 
   const labelsRegisterText = [
@@ -111,6 +121,8 @@ function RegisterProduct() {
                 value={inputsValues[item.id] || ""}
                 onChange={(event) => handleValueInputsText(event, item.id)}
                 placeholder={item.placeholder}
+                id={item.id}
+                htmlFor={item.id}
                 label={item.label}
               />
             </div>

@@ -2,7 +2,7 @@ import useAllProducts from "../../../hooks/useAllProducts";
 import Button from "../../UI/buttons/Button";
 
 function ProductStock() {
-  const { products, isLoading } = useAllProducts();
+  const { products, isLoading, error } = useAllProducts();
 
   return (
     <section className="flex justify-center items-center -my-35 ml-80 p-6 bg-[#FAFAFA] rounded-xl w-200">
@@ -12,6 +12,10 @@ function ProductStock() {
         </h1>
         {isLoading ? (
           <div className="text-center text-gray-500">Carregando...</div>
+        ) : error ? (
+          <div className="text-center text-red-500">
+            Ocorreu um erro ao carregar os produtos. 
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-gray-300 text-center">

@@ -5,6 +5,8 @@ interface InputProps {
   placeholder?: string;
   className?: string;
   pattern?: string;
+  htmlFor?: string;
+  id?: string;
   onClick?: () => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +15,8 @@ interface InputProps {
 const Input = ({
   label,
   typeInput,
+  id,
+  htmlFor,
   value,
   placeholder,
   onChange,
@@ -23,9 +27,10 @@ const Input = ({
 }: InputProps) => {
   return (
     <>
-      <label htmlFor="label">{label}</label>
+      <label htmlFor={htmlFor}>{label}</label>
       <input
         onClick={onClick}
+        id={id}
         onKeyDown={onKeyDown}
         className={className}
         type={typeInput}

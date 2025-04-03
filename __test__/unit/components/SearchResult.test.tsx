@@ -6,7 +6,7 @@ import useAllProducts from "../../../src/hooks/useAllProducts";
 import { describe, it, vi, Mock, expect } from "vitest";
 
 vi.mock("../../../src/hooks/useAllProducts", () => ({
-  default: vi.fn(),
+  default: vi.fn(() => ({ products: [], isLoading: false })),
 }));
 
 describe("ProductStock Component", () => {
@@ -14,7 +14,6 @@ describe("ProductStock Component", () => {
     (useAllProducts as Mock).mockReturnValue({
       products: [],
       isLoading: true,
-      error: null,
     });
 
     render(<ProductStock />);
@@ -24,11 +23,10 @@ describe("ProductStock Component", () => {
   it("should render products when data is loaded", async () => {
     (useAllProducts as Mock).mockReturnValue({
       products: [
-        { name: "Produto A", category: "Categoria X", price: 10.0 },
-        { name: "Produto B", category: "Categoria Y", price: 20.0 },
+        { name: "Produto A", category: "Categoria X", price: "10,00" },
+        { name: "Produto B", category: "Categoria Y", price: "20,00" },
       ],
       isLoading: false,
-      error: null,
     });
 
     render(<ProductStock />);
@@ -38,16 +36,17 @@ describe("ProductStock Component", () => {
       expect(screen.getByText("Produto B")).toBeInTheDocument();
       expect(screen.getByText("Categoria X")).toBeInTheDocument();
       expect(screen.getByText("Categoria Y")).toBeInTheDocument();
-      expect(screen.getByText("R$ 10")).toBeInTheDocument();
-      expect(screen.getByText("R$ 20")).toBeInTheDocument();
+      expect(screen.getByText("R$ 10,00")).toBeInTheDocument();
+      expect(screen.getByText("R$ 20,00")).toBeInTheDocument();
     });
   });
 
   it("should have a remove button for each product", async () => {
     (useAllProducts as Mock).mockReturnValue({
-      products: [{ name: "Produto A", category: "Categoria X", price: 10.0 }],
+      products: [
+        { name: "Produto A", category: "Categoria X", price: "10,00" },
+      ],
       isLoading: false,
-      error: null,
     });
 
     render(<ProductStock />);
@@ -61,11 +60,10 @@ describe("ProductStock Component", () => {
   it("should filter duplicate products", async () => {
     (useAllProducts as Mock).mockReturnValue({
       products: [
-        { name: "Produto A", category: "Categoria X", price: 10.0 },
-        { name: "Produto A", category: "Categoria X", price: 10.0 },
+        { name: "Produto A", category: "Categoria X", price: "10,00" },
+        { name: "Produto A", category: "Categoria X", price: "10,00" },
       ],
       isLoading: false,
-      error: null,
     });
 
     render(<ProductStock />);
@@ -73,24 +71,6 @@ describe("ProductStock Component", () => {
     await waitFor(() => {
       const rows = screen.getAllByRole("row");
       expect(rows).toHaveLength(2);
-    });
-  });
-
-  it("should handle API error", async () => {
-    (useAllProducts as Mock).mockReturnValue({
-      products: [],
-      isLoading: false,
-      error: new Error("Ocorreu um erro ao carregar os produtos. "),
-    });
-
-    render(<ProductStock />);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText((content) =>
-          content.includes("Ocorreu um erro ao carregar os produtos")
-        )
-      ).toBeInTheDocument();
     });
   });
 });

@@ -15,27 +15,27 @@ function Home() {
   };
 
   const handleExploreProducts = () => {
-    setAllProducts((prev) => prev + 4);
+    setAllProducts((prev) => prev + 2);
   };
 
   return (
     <>
-      <main>
+      <main className="p-4">
         <section>
-          <article className="flex justify-start flex-col ml-4">
+          <article className="flex flex-col ml-4 md:ml-0">
             <SortByProducts text="Este mês" />
-            <div className="flex justify-between">
-              <h1 className="text-4xl font-semibold">Mais vendidos</h1>
+            <div className="flex justify-between items-center flex-wrap">
+              <h1 className="text-2xl md:text-4xl font-semibold">Mais vendidos</h1>
               {allProducts < products.length && (
                 <Button
                   textButton="Ver todos"
-                  className=" w-44 h-10 mr-14"
+                  className="w-32 md:w-44 h-10 mr-4 md:mr-14"
                   onClick={handleBestSellers}
                 />
               )}
             </div>
           </article>
-          <figure className="flex justify-start items-start overflow-y-auto flex-row m-4 gap-6">
+          <figure className="flex flex-wrap overflow-auto gap-4 p-2 md:p-4">
             {isLoading && <h1>Carregando...</h1>}
             {products.slice(0, bestProducts).map((item, index) => (
               <ProductCard
@@ -47,13 +47,13 @@ function Home() {
             ))}
           </figure>
           <Divider className="my-10" />
-          <article className="flex justify-start flex-col ml-4">
+          <article className="flex flex-col ml-4 md:ml-0">
             <SortByProducts text="Outros produtos" />
-            <div className="flex justify-between">
-              <h1 className="text-4xl font-semibold">Explore os produtos</h1>
+            <div className="flex justify-between items-center flex-wrap">
+              <h1 className="text-2xl md:text-4xl font-semibold">Explore os produtos</h1>
             </div>
           </article>
-          <figure className="flex justify-start items-start flex-wrap overflow-x-scroll m-4 gap-6">
+          <figure className="flex flex-wrap overflow-auto gap-4 p-2 md:p-4">
             {isLoading && <h1>Carregando...</h1>}
             {products.slice(0, allProducts).map((item, index) => (
               <ProductCard
@@ -64,11 +64,11 @@ function Home() {
               />
             ))}
           </figure>
-          <div className="flex justify-center items-center my-20">
+          <div className="flex justify-center items-center my-10 md:my-20">
             <Button
               textButton="Ver todos os produtos"
               onClick={handleExploreProducts}
-              className="w-70 h-14"
+              className="w-40 md:w-70 h-12 md:h-14"
             />
           </div>
         </section>
