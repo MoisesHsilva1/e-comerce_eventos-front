@@ -1,5 +1,5 @@
 import useAllProducts from "../../../hooks/useAllProducts";
-import Button from "../../UI/buttons/Button";
+import Button from "../../UI/atoms/buttons/Button";
 
 function ProductStock() {
   const { products, isLoading, error } = useAllProducts();

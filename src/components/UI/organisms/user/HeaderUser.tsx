@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../UI/Inputs/Input";
-import IconCart from "../../UI/Icons/IconCart";
-import IconUser from "../../UI/Icons/IconUser";
-import Divider from "../../UI/Divider";
+import Input from "../../atoms/Inputs/Input";
+import IconCart from "../../atoms/Icons/IconCart";
+import IconUser from "../../atoms/Icons/IconUser";
+import Divider from "../../atoms/Divider";
 import { useState } from "react";
 
 function HeaderUser() {
@@ -14,7 +14,7 @@ function HeaderUser() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      navigate("/pesquisa", { state: { searchTerm: search }, replace: true });
+      navigate("/busca", { state: { searchTerm: search }, replace: true });
     }
   };
 

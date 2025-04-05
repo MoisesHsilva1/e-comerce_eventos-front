@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Input from "../../UI/Inputs/Input";
-import InputImage from "../../UI/Inputs/InputImage";
-import Button from "../../UI/buttons/Button";
+import Input from "../../UI/atoms/Inputs/Input";
+import InputImage from "../../UI/atoms/Inputs/InputImage";
+import Button from "../../UI/atoms/buttons/Button";
 import useCreateProduct from "../../../hooks/useCreateProduct";
 import { ToastContainer, toast } from "react-toastify";
 

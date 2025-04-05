@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import ProductStock from "../../../src/components/Admin/productStock/ProductStock";
+import ProductStock from "../../../src/components/templates/admin/ProductStock";
 import useAllProducts from "../../../src/hooks/useAllProducts";
 import { describe, it, vi, Mock, expect } from "vitest";
 

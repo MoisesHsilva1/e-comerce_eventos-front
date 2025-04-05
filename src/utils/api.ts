@@ -17,3 +17,4 @@ export const createProductUrl = (): string => createEndpointUrl("/create");
 export const getProductUrl = (): string => createEndpointUrl("/get");
 export const getAmountProductUrl = (): string => createEndpointUrl("/getAmount");
 export const searchByProductName = (): string => createEndpointUrl("/searchByName")
+export const searchByProductID = (id: string): string => createEndpointUrl(`/id/${id}`)

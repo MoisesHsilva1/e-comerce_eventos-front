@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { describe, it, vi, Mock, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import RegisterProduct from "../../../src/components/Admin/registerProduct/RegisterProduct";
+import RegisterProduct from "../../../src/components/templates/admin/RegisterProduct";
 import useCreateProduct from "../../../src/hooks/useCreateProduct";
 import React from "react";
 
@@ -26,7 +26,6 @@ describe("RegisterProduct Component", () => {
       createProduct: createProductMock,
     }));
   });
-  
 
   it("deve renderizar os campos de entrada corretamente", () => {
     render(<RegisterProduct />);
