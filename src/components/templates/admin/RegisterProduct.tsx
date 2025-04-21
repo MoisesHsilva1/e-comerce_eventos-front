@@ -147,7 +147,7 @@ function RegisterProduct() {
 
           <Button
             type="submit"
-            className="w-50 h-12"
+            className="w-50 h-12 text-white"
             onClick={toastsProducts}
             textButton="Cadastrar Produto"
             value="Submit"

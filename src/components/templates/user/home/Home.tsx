@@ -34,7 +34,7 @@ function Home() {
               {allProducts < products.length && (
                 <Button
                   textButton="Ver todos"
-                  className="w-32 md:w-44 h-10 mr-4 md:mr-14"
+                  className="text-white w-32 md:w-44 h-10 mr-4 md:mr-14"
                   onClick={handleBestSellers}
                 />
               )}
@@ -77,7 +77,7 @@ function Home() {
             <Button
               textButton="Ver todos os produtos"
               onClick={handleExploreProducts}
-              className="w-40 md:w-70 h-12 md:h-14"
+              className="w-40 text-white md:w-70 h-12 md:h-14"
             />
           </div>
         </section>

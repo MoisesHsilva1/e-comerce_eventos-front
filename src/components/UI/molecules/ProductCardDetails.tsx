@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import Divider from "../atoms/Divider";
 import Button from "../atoms/buttons/Button";
 import ButtonAmount from "../atoms/buttons/ButtonAmount";
@@ -13,6 +14,8 @@ const ProductCardDetails = ({
   description,
   price,
 }: ProductCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <main className="flex flex-col lg:flex-row justify-center items-center flex-wrap gap-4 p-6 lg:p-12 pb-4">
@@ -31,7 +34,11 @@ const ProductCardDetails = ({
           <Divider />
           <span className="flex flex-col sm:flex-row gap-4 mt-2">
             <ButtonAmount />
-            <Button textButton="Comprar" className="w-full sm:w-36" />
+            <Button
+              textButton="Comprar"
+              className="w-full text-white sm:w-36"
+              onClick={() => navigate("/carrinho")}
+            />
           </span>
         </section>
       </main>

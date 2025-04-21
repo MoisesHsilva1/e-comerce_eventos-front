@@ -14,7 +14,6 @@ const ButtonAmount = ({ className = "" }: ButtonAmountProps) => {
       <button
         onClick={() => setCount((prev) => Math.max(prev - 1, 0))}
         className="w-10 h-10 flex justify-center items-center border-r border-gray-600"
-        aria-label="Diminuir quantidade"
       >
         –
       </button>
@@ -24,7 +23,6 @@ const ButtonAmount = ({ className = "" }: ButtonAmountProps) => {
       <button
         onClick={() => setCount((prev) => prev + 1)}
         className="w-10 h-10 flex justify-center items-center bg-[#7D8184] text-white border-l border-gray-600"
-        aria-label="Aumentar quantidade"
       >
         +
       </button>

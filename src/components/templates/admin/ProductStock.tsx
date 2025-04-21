@@ -52,7 +52,7 @@ function ProductStock() {
                         <td className="border border-gray-300 p-3">
                           <Button
                             type="button"
-                            className="bg-red-500 hover:bg-red-700 "
+                            className="bg-red-500 text-white hover:bg-red-700 "
                             textButton="Excluir"
                           ></Button>
                         </td>

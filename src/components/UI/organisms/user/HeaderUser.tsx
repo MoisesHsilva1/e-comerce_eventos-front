@@ -47,7 +47,7 @@ function HeaderUser() {
             placeholder="O que você está procurando?"
             className="h-8 w-full md:w-64 text-sm bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4"
           />
-          <button className="p-2" aria-label="Carrinho">
+          <button className="p-2" aria-label="Carrinho" onClick={() =>  navigate("/carrinho")}>
             <IconCart />
           </button>
           <button className="p-2" aria-label="Usuário">

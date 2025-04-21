@@ -23,7 +23,7 @@ const Input = ({
   onClick,
   pattern,
   onKeyDown,
-  className = "w-[330px] h-[50px] bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4",
+  className = "",
 }: InputProps) => {
   return (
     <>
@@ -32,7 +32,7 @@ const Input = ({
         onClick={onClick}
         id={id}
         onKeyDown={onKeyDown}
-        className={className}
+        className={`${className} w-[330px] h-[50px] bg-[#F5F5F5] border rounded-sm border-gray-300 focus:border-black focus:ring-2 focus:ring-black px-4`}
         type={typeInput}
         value={value}
         placeholder={placeholder}

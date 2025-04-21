@@ -1,9 +1,10 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useSearchProductName from "../../../../hooks/useSearchProductName";
 import ProductCard from "../../../UI/molecules/ProductCard";
 
 function SearchResult() {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchProduct = location.state?.searchTerm || "";
   const { products, isLoading, error } = useSearchProductName(searchProduct);
 
@@ -42,13 +43,14 @@ function SearchResult() {
               py-4
             "
           >
-            {products.map((item, index) => (
+            {products.map((item) => (
               <ProductCard
-                key={index}
+                key={item._id}
                 alt=""
                 nameProduct={item.name}
                 price={item.price}
                 className="min-h-[200px] p-4"
+                onClick={() => navigate(`/produto/${item._id}`)}
               />
             ))}
           </figure>
