@@ -25,8 +25,8 @@ const ProductCard = ({
       <div className="w-full h-48 flex justify-center items-center overflow-hidden  ">
         <img
           className="w-full bg-[#F5F5F5] h-full object-cover"
-          src={image}
-          alt={alt}
+          src={image || "/placeholder.png"}
+          alt={alt || "imagem do produto"}
         />
       </div>
       <div className="mt-4 text-center">

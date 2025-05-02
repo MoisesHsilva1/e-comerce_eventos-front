@@ -5,9 +5,15 @@ interface InputImage {
   label?: string;
   placeholder?: string;
   value?: string;
+  onImageChange: (image: File | null) => void;
 }
 
-const InputImage = ({ label, placeholder, value }: InputImage) => {
+const InputImage = ({
+  label,
+  placeholder,
+  value,
+  onImageChange,
+}: InputImage) => {
   const [image, setImage] = useState<string | undefined>(undefined);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +26,15 @@ const InputImage = ({ label, placeholder, value }: InputImage) => {
       typeof result === "string"
         ? setImage(result)
         : console.error("Error on process image");
+
+      onImageChange(file);
     };
     reader.readAsDataURL(file);
   };
 
   const handleRemoveImage = () => {
     setImage(undefined);
+    onImageChange(null);
   };
 
   const uploadImageButton = () => {
@@ -52,7 +61,7 @@ const InputImage = ({ label, placeholder, value }: InputImage) => {
             onChange={handleImageChange}
             required
           />
-          <img className="object-contain" src={image} />
+          {image && <img className="object-contain" src={image} />}
           <button
             value={value}
             className="w-25 bg-red-400 p-2 rounded-sm hover:bg-red-300"
@@ -65,4 +74,5 @@ const InputImage = ({ label, placeholder, value }: InputImage) => {
     </>
   );
 };
+
 export default InputImage;

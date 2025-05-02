@@ -8,6 +8,7 @@ interface Product {
   description: string;
   category: string;
   price: number;
+  imageUrl: string;
 }
 
 interface ApiResponse {
@@ -18,14 +19,10 @@ interface ApiResponse {
 function useSearchProductName(name?: string) {
   const apiUrl = searchByProductName();
 
-  const {
-    data,
-    error,
-    isLoading,
-  } = useQuery<ApiResponse, Error>({
+  const { data, error, isLoading } = useQuery<ApiResponse, Error>({
     queryKey: ["searchByProductName", name],
     queryFn: async () => {
-      if (!name) return { success: false, data: [] }; 
+      if (!name) return { success: false, data: [] };
       const { data } = await axios.get<ApiResponse>(
         `${apiUrl}?name=${encodeURIComponent(name)}`
       );
@@ -33,7 +30,7 @@ function useSearchProductName(name?: string) {
     },
   });
 
-  const products = data?.data ?? []; 
+  const products = data?.data ?? [];
 
   return { products, error, isLoading };
 }

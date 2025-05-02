@@ -7,12 +7,14 @@ interface ProductCardProps {
   title?: string;
   description?: string;
   price?: number;
+  image?: string;
 }
 
 const ProductCardDetails = ({
   title,
   description,
   price,
+  image,
 }: ProductCardProps) => {
   const navigate = useNavigate();
 
@@ -21,11 +23,19 @@ const ProductCardDetails = ({
       <main className="flex flex-col lg:flex-row justify-center items-center flex-wrap gap-4 p-6 lg:p-12 pb-4">
         <article className="flex flex-col lg:flex-row gap-4">
           <div className="flex justify-end items-start flex-row lg:flex-col gap-2">
-            <figure className="bg-gray-100 w-24 h-24 lg:w-30 lg:h-30"></figure>
-            <figure className="bg-gray-100 w-24 h-20 lg:w-30 lg:h-28"></figure>
-            <figure className="bg-gray-100 w-24 h-20 lg:w-30 lg:h-28"></figure>
+            <figure className="bg-gray-100 w-24 h-24 lg:w-30 lg:h-30">
+              <img src={image} alt="image product" />
+            </figure>
+            <figure className="bg-gray-100 w-24 h-20 lg:w-30 lg:h-28">
+              <img src={image} alt="image product" />
+            </figure>
+            <figure className="bg-gray-100 w-24 h-20 lg:w-30 lg:h-28">
+                <img src={image} alt="image product" />
+            </figure>
           </div>
-          <figure className="bg-gray-100 w-full h-60 lg:w-100 lg:h-90"></figure>
+          <figure className="bg-gray-100 w-full h-60 lg:w-100 lg:h-90">
+            <img src={image} alt="image product" />
+          </figure>
         </article>
         <section className="flex flex-col gap-2 p-6 lg:p-12 w-full lg:w-auto">
           <h1 className="text-2xl lg:text-3xl font-bold">{title}</h1>

@@ -46,7 +46,7 @@ function SearchResult() {
             {products.map((item) => (
               <ProductCard
                 key={item._id}
-                alt=""
+                image={item.imageUrl}
                 nameProduct={item.name}
                 price={item.price}
                 className="min-h-[200px] p-4"

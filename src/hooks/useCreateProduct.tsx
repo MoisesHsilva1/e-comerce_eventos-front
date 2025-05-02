@@ -2,18 +2,26 @@ import { useMutation } from "@tanstack/react-query";
 import { createProductUrl } from "../utils/api";
 import axios from "axios";
 
-interface Product {
+interface ProductFormData {
   name: string;
   description: string;
   category: string;
   price: number;
+  image: File;
 }
 
-const sendProductData = async (productData: Product) => {
+const sendProductData = async (productData: ProductFormData) => {
   const apiUrl = createProductUrl();
+  const formData = new FormData();
 
-  const res = await axios.post(apiUrl, productData, {
-    headers: { "Content-Type": "application/json" },
+  formData.append("name", productData.name);
+  formData.append("description", productData.description);
+  formData.append("category", productData.category);
+  formData.append("price", productData.price.toString());
+  formData.append("image", productData.image); 
+
+  const res = await axios.post(apiUrl, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
   });
 
   return res.data;

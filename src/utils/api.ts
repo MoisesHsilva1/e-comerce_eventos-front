@@ -4,7 +4,7 @@ const getBaseUrl = (): string => {
   if (!apiBaseUrl) {
     throw new Error("API base URL is not defined in the environment variables");
   }
-  
+
   return apiBaseUrl;
 };
 
@@ -14,7 +14,10 @@ const createEndpointUrl = (endpoint: string): string => {
 };
 
 export const createProductUrl = (): string => createEndpointUrl("/create");
-export const getProductUrl = (): string => createEndpointUrl("/get");
-export const getAmountProductUrl = (): string => createEndpointUrl("/getAmount");
-export const searchByProductName = (): string => createEndpointUrl("/searchByName")
-export const searchByProductID = (id: string): string => createEndpointUrl(`/id/${id}`)
+export const getProductUrl = (): string => createEndpointUrl("/list");
+export const getAmountProductUrl = (): string =>
+  createEndpointUrl("/getAmount");
+export const searchByProductName = (): string =>
+  createEndpointUrl("/searchByName");
+export const searchByProductID = (id: string): string =>
+  createEndpointUrl(`/id/${id}`);

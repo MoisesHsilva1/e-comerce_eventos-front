@@ -10,38 +10,37 @@ type Product = {
   description: string;
   category: string;
   price: number;
+  image: File;
 };
 
 function RegisterProduct() {
   const [inputsValues, setInputsValues] = useState<Record<string, string>>({});
+  const [image, setImage] = useState<File | null>(null);
   const { data, createProduct, error } = useCreateProduct();
 
   const toastsProducts = () => {
-    {
-      error &&
-        toast.error("Erro ao cadastrar o produto.", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+    if (error) {
+      toast.error("Erro ao cadastrar o produto.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
     }
-    {
-      data &&
-        toast.success("Produto cadastrado com sucesso!!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+
+    if (data) {
+      toast.success("Produto cadastrado com sucesso!!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
     }
   };
 
@@ -70,16 +69,25 @@ function RegisterProduct() {
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!image) {
+      toast.error("Imagem é obrigatória.", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return;
+    }
+
     const formattedData: Product = {
       name: inputsValues.name,
       description: inputsValues.description,
       category: inputsValues.category,
       price: Number(inputsValues.price.replace(",", ".")),
+      image,
     };
-    4;
 
     createProduct(formattedData);
     setInputsValues({});
+    setImage(null);
   };
 
   const labelsRegisterText = [
@@ -141,6 +149,7 @@ function RegisterProduct() {
           ))}
 
           <InputImage
+            onImageChange={setImage}
             label="Imagem do produto"
             placeholder="Carregue a imagem do seu produto"
           />

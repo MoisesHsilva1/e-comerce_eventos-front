@@ -45,7 +45,7 @@ function Home() {
             {products.slice(0, bestProducts).map((item) => (
               <ProductCard
                 key={item._id}
-                alt=""
+                image={item.imageUrl || "/placeholder.png"}
                 nameProduct={item.name}
                 price={item.price}
                 onClick={() => navigate(`/produto/${item._id}`)}
@@ -66,12 +66,12 @@ function Home() {
             {products.slice(0, allProducts).map((item) => (
               <ProductCard
                 key={item._id}
-                alt=""
+                image={item.imageUrl || "/placeholder.png"}
                 nameProduct={item.name}
                 price={item.price}
                 onClick={() => navigate(`/produto/${item._id}`)}
               />
-            ))}
+            ))} 
           </figure>
           <div className="flex justify-center items-center my-10 md:my-20">
             <Button

@@ -21,6 +21,7 @@ function ProductDetails() {
         {product.map((item, index) => (
           <ProductCardDetails
             key={index}
+            image={item.imageUrl}
             title={item.name}
             price={item.price}
             description={item.description}
@@ -35,7 +36,7 @@ function ProductDetails() {
           {products.slice(0, 3).map((item) => (
             <ProductCard
               key={item._id}
-              alt=""
+              image={item.imageUrl}
               nameProduct={item.name}
               price={item.price}
               onClick={() => navigate(`/produto/${item._id}`)}
