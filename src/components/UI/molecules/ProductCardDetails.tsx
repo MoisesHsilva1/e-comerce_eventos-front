@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import Divider from "../atoms/Divider";
 import Button from "../atoms/buttons/Button";
 import ButtonAmount from "../atoms/buttons/ButtonAmount";
@@ -8,6 +7,10 @@ interface ProductCardProps {
   description?: string;
   price?: number;
   image?: string;
+  onClick?: () => void;
+  qtd: number;
+  qtdUp: () => void;
+  qtdDown: () => void;
 }
 
 const ProductCardDetails = ({
@@ -15,9 +18,11 @@ const ProductCardDetails = ({
   description,
   price,
   image,
+  onClick,
+  qtd,
+  qtdDown,
+  qtdUp,
 }: ProductCardProps) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <main className="flex flex-col lg:flex-row justify-center items-center flex-wrap gap-4 p-6 lg:p-12 pb-4">
@@ -30,7 +35,7 @@ const ProductCardDetails = ({
               <img src={image} alt="image product" />
             </figure>
             <figure className="bg-gray-100 w-24 h-20 lg:w-30 lg:h-28">
-                <img src={image} alt="image product" />
+              <img src={image} alt="image product" />
             </figure>
           </div>
           <figure className="bg-gray-100 w-full h-60 lg:w-100 lg:h-90">
@@ -43,11 +48,15 @@ const ProductCardDetails = ({
           <p>{description}</p>
           <Divider />
           <span className="flex flex-col sm:flex-row gap-4 mt-2">
-            <ButtonAmount />
+            <ButtonAmount
+              count={qtd}
+              setCountDown={qtdDown}
+              setCountUp={qtdUp}
+            />
             <Button
               textButton="Comprar"
               className="w-full text-white sm:w-36"
-              onClick={() => navigate("/carrinho")}
+              onClick={onClick}
             />
           </span>
         </section>

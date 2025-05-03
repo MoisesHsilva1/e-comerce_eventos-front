@@ -1,16 +1,20 @@
 import Button from "../atoms/buttons/Button";
-import { useNavigate } from "react-router";
 
 interface CartDetails {
   productName?: string;
   price?: number;
   qtd?: number;
   total?: number;
+  onClick: () => void;
 }
 
-const FieldCartProduct = ({ productName, price, qtd, total }: CartDetails) => {
-  const navigate = useNavigate();
-
+const FieldCartProduct = ({
+  productName,
+  price,
+  qtd,
+  total,
+  onClick,
+}: CartDetails) => {
   return (
     <>
       <main className="w-294 h-full">
@@ -30,14 +34,14 @@ const FieldCartProduct = ({ productName, price, qtd, total }: CartDetails) => {
             <h1>R${total}</h1>
           </div>
         </article>
-        <section className="py-2 mt-6">
-          <Button
-            className="border-1 bg-white border-gray-400"
-            onClick={() => navigate("/")}
-            textButton="Voltar para loja"
-          />
-        </section>
       </main>
+      <section className="flex justify-end py-2 mt-6">
+        <Button
+          className="border-1 bg-red-500 text-white hover:bg-red-400 border-gray-400"
+          onClick={onClick}
+          textButton="Remover"
+        />
+      </section>
     </>
   );
 };

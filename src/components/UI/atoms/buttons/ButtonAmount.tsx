@@ -1,18 +1,20 @@
-import { useState } from "react";
 
 interface ButtonAmountProps {
   className?: string;
+  count?: number;
+  setCountUp: () => void;
+  setCountDown: () => void;
 }
 
-const ButtonAmount = ({ className = "" }: ButtonAmountProps) => {
-  const [count, setCount] = useState(0);
+const ButtonAmount = ({ className = "", count, setCountDown, setCountUp }: ButtonAmountProps) => {
+  // const [count, setCount] = useState(0);
 
   return (
     <section
       className={`flex items-center border border-gray-500 rounded w-36 ${className}`}
     >
       <button
-        onClick={() => setCount((prev) => Math.max(prev - 1, 0))}
+        onClick={setCountDown}
         className="w-10 h-10 flex justify-center items-center border-r border-gray-600"
       >
         –
@@ -21,7 +23,7 @@ const ButtonAmount = ({ className = "" }: ButtonAmountProps) => {
       <p className="flex-1 text-center">{count}</p>
 
       <button
-        onClick={() => setCount((prev) => prev + 1)}
+        onClick={setCountUp}
         className="w-10 h-10 flex justify-center items-center bg-[#7D8184] text-white border-l border-gray-600"
       >
         +

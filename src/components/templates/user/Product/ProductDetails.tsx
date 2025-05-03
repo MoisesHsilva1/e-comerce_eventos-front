@@ -1,17 +1,34 @@
-import { useParams } from "react-router";
+import { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router";
+import { CartContext } from "../../../../context/CartContext";
+
 import useProductID from "../../../../hooks/useProductID";
 import ProductCardDetails from "../../../UI/molecules/ProductCardDetails";
 import SortByProducts from "../../../UI/molecules/SortByProducts";
 import ProductCard from "../../../UI/molecules/ProductCard";
 import useAllProducts from "../../../../hooks/useAllProducts";
-import { useNavigate } from "react-router";
 
 function ProductDetails() {
   const params = useParams();
   const navigate = useNavigate();
+  const [qtd, setQtd] = useState(1);
 
   const { product } = useProductID(params.id);
   const { products, isLoading, error } = useAllProducts();
+  const { addItem } = useContext(CartContext);
+
+  const sendProductCart = () => {
+    const productData = product.map((prod) => ({
+      id: prod._id,
+      name: prod.name,
+      price: prod.price,
+      qtd: qtd,
+    }));
+
+    productData.forEach((item) => addItem(item));
+
+    navigate("/carrinho");
+  };
 
   return (
     <main className="px-4 md:px-20">
@@ -20,11 +37,15 @@ function ProductDetails() {
         {error && <h1>Error</h1>}
         {product.map((item, index) => (
           <ProductCardDetails
+            qtd={qtd}
+            qtdDown={() => setQtd((prev) => Math.max(prev - 1, 1))}
+            qtdUp={() => setQtd((prev) => prev + 1)}
             key={index}
             image={item.imageUrl}
             title={item.name}
             price={item.price}
             description={item.description}
+            onClick={sendProductCart}
           />
         ))}
       </section>
