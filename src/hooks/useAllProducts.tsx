@@ -8,7 +8,7 @@ interface Product {
   description?: string;
   category?: string;
   price?: number;
-  imageUrl?: string; 
+  imageUrl?: string;
 }
 
 function useAllProducts() {
@@ -22,7 +22,7 @@ function useAllProducts() {
     queryKey: ["getProducts"],
     queryFn: async () => {
       const { data: response } = await axios.get(apiUrl);
-      return Array.isArray(response.data) ? response.data : [];
+      return response;
     },
   });
 

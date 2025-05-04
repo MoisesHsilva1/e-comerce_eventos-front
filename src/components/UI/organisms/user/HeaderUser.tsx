@@ -35,7 +35,7 @@ function HeaderUser() {
             Home
           </a>
           <a className="hover:text-gray-600 cursor-pointer">Contato</a>
-          <a className="hover:text-gray-600 cursor-pointer">Login</a>
+          <a className="hover:text-gray-600 cursor-pointer" onClick={() => navigate("/login")}>Login</a>
         </nav>
 
         <nav className="flex flex-wrap items-center gap-3 md:gap-6 w-full md:w-auto">
@@ -50,7 +50,7 @@ function HeaderUser() {
           <button className="p-2" aria-label="Carrinho" onClick={() =>  navigate("/carrinho")}>
             <IconCart />
           </button>
-          <button onClick={() => navigate("/login")} className="p-2" aria-label="Usuário">
+          <button className="p-2" aria-label="Usuário">
             <IconUser />
           </button>
         </nav>

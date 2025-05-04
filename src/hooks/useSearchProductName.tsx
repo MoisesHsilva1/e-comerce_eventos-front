@@ -30,7 +30,7 @@ function useSearchProductName(name?: string) {
     },
   });
 
-  const products = data?.data ?? [];
+  const products = data;
 
   return { products, error, isLoading };
 }
