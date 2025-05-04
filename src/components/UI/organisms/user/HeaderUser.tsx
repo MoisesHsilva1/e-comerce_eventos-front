@@ -50,7 +50,7 @@ function HeaderUser() {
           <button className="p-2" aria-label="Carrinho" onClick={() =>  navigate("/carrinho")}>
             <IconCart />
           </button>
-          <button className="p-2" aria-label="Usuário">
+          <button onClick={() => navigate("/login")} className="p-2" aria-label="Usuário">
             <IconUser />
           </button>
         </nav>

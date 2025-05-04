@@ -5,6 +5,8 @@ import ProductStockPage from "../components/pages/Admin/ProductStockPage";
 import SearchResultPage from "../components/pages/user/SearchResultPage";
 import ProductDetailsPage from "../components/pages/user/ProductDetailsPage";
 import CartProductsPage from "../components/pages/user/CartProductsPage";
+import LoginPage from "../components/pages/user/LoginPage";
+import RegisterPage from "../components/pages/user/RegisterPage";
 
 function AppRoutes() {
   return (
@@ -15,6 +17,8 @@ function AppRoutes() {
       <Route path="/busca" element={<SearchResultPage />}></Route>
       <Route path="/produto/:id" element={<ProductDetailsPage />}></Route>
       <Route path="/carrinho" element={<CartProductsPage />}></Route>
+      <Route path="/login" element={<LoginPage />}></Route>
+      <Route path="/cadastro" element={<RegisterPage />}></Route>
     </Routes>
   );
 }

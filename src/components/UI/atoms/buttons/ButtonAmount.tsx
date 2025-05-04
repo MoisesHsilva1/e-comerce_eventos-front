@@ -1,4 +1,3 @@
-
 interface ButtonAmountProps {
   className?: string;
   count?: number;
@@ -6,9 +5,12 @@ interface ButtonAmountProps {
   setCountDown: () => void;
 }
 
-const ButtonAmount = ({ className = "", count, setCountDown, setCountUp }: ButtonAmountProps) => {
-  // const [count, setCount] = useState(0);
-
+const ButtonAmount = ({
+  className = "",
+  count,
+  setCountDown,
+  setCountUp,
+}: ButtonAmountProps) => {
   return (
     <section
       className={`flex items-center border border-gray-500 rounded w-36 ${className}`}

@@ -16,8 +16,8 @@ function Footer() {
   const itemsAccount = [
     { title: "Conta" },
     { description: "Minha conta", link: "", type: "myAccount" },
-    { description: "Login / Registro", link: "", type: "login_Register" },
-    { description: "Carrinho", link: "", type: "car" },
+    { description: "Login / Registro", link: "/login", type: "login_Register" },
+    { description: "Carrinho", link: "/carrinho", type: "car" },
   ];
 
   const itemsPolicies = [
