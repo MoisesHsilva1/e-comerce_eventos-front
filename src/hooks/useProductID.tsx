@@ -11,25 +11,22 @@ interface Product {
   imageUrl: string;
 }
 
-interface ApiResponse {
-  success: boolean;
-  data: Product | null;
-}
-
 const useProductID = (id?: string) => {
   const apiUrl = id ? searchByProductID(id) : null;
 
-  const { data, error, isLoading } = useQuery<ApiResponse, Error>({
+  const {
+    data: product = [],
+    error,
+    isLoading,
+  } = useQuery<Product[], Error>({
     queryKey: ["searchByProductID", id],
     queryFn: async () => {
-      if (!apiUrl) return { success: false, data: null };
-      const { data } = await axios.get<ApiResponse>(apiUrl);
-      return data;
+      if (!apiUrl) throw new Error("URL inválida");
+      const res = await axios.get(apiUrl);
+      return res.data;
     },
     enabled: !!id,
   });
-
-  const product = data?.data ? [data.data] : [];
 
   return { product, error, isLoading };
 };
