@@ -1,73 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Input from "../../UI/atoms/Inputs/Input";
 import InputImage from "../../UI/atoms/Inputs/InputImage";
 import Button from "../../UI/atoms/buttons/Button";
-import useCreateProduct from "../../../hooks/useCreateProduct";
+import { useCreateProduct } from "../../../hooks/useCreateProduct";
 import { ToastContainer, toast } from "react-toastify";
 
-type Product = {
+interface InputsValues {
   name: string;
-  description: string;
   category: string;
-  price: number;
-  image: File;
-};
+  description: string;
+  price: string;
+}
 
 function RegisterProduct() {
-  const [inputsValues, setInputsValues] = useState<Record<string, string>>({});
+  const [inputsValues, setInputsValues] = useState<InputsValues>({
+    name: "",
+    category: "",
+    description: "",
+    price: "",
+  });
   const [image, setImage] = useState<File | null>(null);
-  const { data, createProduct, error } = useCreateProduct();
 
-  const toastsProducts = () => {
+  const { data, mutate: createProduct, error } = useCreateProduct();
+
+  useEffect(() => {
     if (error) {
       toast.error("Erro ao cadastrar o produto.", {
         position: "top-center",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
         theme: "light",
       });
     }
+  }, [error]);
 
+  useEffect(() => {
     if (data) {
       toast.success("Produto cadastrado com sucesso!!", {
         position: "top-center",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
         theme: "light",
       });
+      setInputsValues({ name: "", category: "", description: "", price: "" });
+      setImage(null);
     }
-  };
+  }, [data]);
 
-  const handleValueInputsText = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    field: string
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof InputsValues
   ) => {
-    setInputsValues((prevValues) => ({
-      ...prevValues,
-      [field]: event.target.value,
-    }));
+    setInputsValues((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const handleValueInputsNumber = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    field: string
-  ) => {
-    const value = event.target.value.replace(/[^0-9]/g, "");
-
-    setInputsValues((prevValues) => ({
-      ...prevValues,
-      [field]: value,
-    }));
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/[^0-9]/g, "");
+    setInputsValues((prev) => ({ ...prev, price: numericValue }));
   };
 
-  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     if (!image) {
       toast.error("Imagem é obrigatória.", {
@@ -77,39 +68,33 @@ function RegisterProduct() {
       return;
     }
 
-    const formattedData: Product = {
+    const productData = {
       name: inputsValues.name,
-      description: inputsValues.description,
       category: inputsValues.category,
-      price: Number(inputsValues.price.replace(",", ".")),
+      description: inputsValues.description,
+      price: Number(inputsValues.price) || 0,
       image,
     };
 
-    createProduct(formattedData);
-    setInputsValues({});
-    setImage(null);
+    createProduct(productData);
   };
 
   const labelsRegisterText = [
     {
-      id: "name",
+      id: "name" as const,
       label: "Nome do produto",
       placeholder: "Ex.: Smartphone Galaxy S24 Ultra 256GB",
     },
     {
-      id: "category",
+      id: "category" as const,
       label: "Categoria",
       placeholder: "Ex.: Eletrônicos, Roupas, Livros",
     },
     {
-      id: "description",
+      id: "description" as const,
       label: "Descrição",
       placeholder: "Ex.: Smartphone com tela AMOLED de 6.8",
     },
-  ];
-
-  const labelRegisterNumber = [
-    { id: "price", label: "Preço", placeholder: "Ex.: R$100,00" },
   ];
 
   return (
@@ -122,31 +107,30 @@ function RegisterProduct() {
           onSubmit={handleSubmitForm}
           className="flex flex-wrap justify-center gap-10"
         >
-          {labelsRegisterText.map((item) => (
-            <div className="flex flex-col" key={item.id}>
+          {labelsRegisterText.map(({ id, label, placeholder }) => (
+            <div className="flex flex-col" key={id}>
               <Input
                 typeInput="text"
-                value={inputsValues[item.id] || ""}
-                onChange={(event) => handleValueInputsText(event, item.id)}
-                placeholder={item.placeholder}
-                id={item.id}
-                htmlFor={item.id}
-                label={item.label}
+                value={inputsValues[id]}
+                onChange={(e) => handleInputChange(e, id)}
+                placeholder={placeholder}
+                id={id}
+                htmlFor={id}
+                label={label}
               />
             </div>
           ))}
-          {labelRegisterNumber.map((item) => (
-            <div className="flex flex-col" key={item.id}>
-              <Input
-                typeInput="number"
-                value={inputsValues[item.id] || ""}
-                onChange={(event) => handleValueInputsNumber(event, item.id)}
-                placeholder={item.placeholder}
-                label={item.label}
-                pattern="[0-9]+$"
-              />
-            </div>
-          ))}
+
+          <div className="flex flex-col">
+            <Input
+              typeInput="number"
+              value={inputsValues.price}
+              onChange={handlePriceChange}
+              placeholder="Ex.: R$100,00"
+              label="Preço"
+              pattern="[0-9]+$"
+            />
+          </div>
 
           <InputImage
             onImageChange={setImage}
@@ -157,10 +141,10 @@ function RegisterProduct() {
           <Button
             type="submit"
             className="w-50 h-12 text-white"
-            onClick={toastsProducts}
-            textButton="Cadastrar Produto"
+            textButton={"Cadastrar Produto"}
             value="Submit"
           />
+
           <ToastContainer />
         </form>
       </article>

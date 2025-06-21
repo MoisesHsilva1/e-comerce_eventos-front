@@ -1,8 +1,8 @@
-import useAllProducts from "../../../hooks/useAllProducts";
+import { useAllProducts } from "../../../hooks/useAllProducts";
 import Button from "../../UI/atoms/buttons/Button";
 
 function ProductStock() {
-  const { products, isLoading, error } = useAllProducts();
+  const { data: products = [], isLoading, error } = useAllProducts();
 
   return (
     <section className="flex justify-center items-center -my-35 ml-80 p-6 bg-[#FAFAFA] rounded-xl w-200">
@@ -14,7 +14,7 @@ function ProductStock() {
           <div className="text-center text-gray-500">Carregando...</div>
         ) : error ? (
           <div className="text-center text-red-500">
-            Ocorreu um erro ao carregar os produtos. 
+            Ocorreu um erro ao carregar os produtos.
           </div>
         ) : (
           <div className="overflow-x-auto">

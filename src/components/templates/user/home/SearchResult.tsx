@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router";
-import useSearchProductName from "../../../../hooks/useSearchProductName";
+import { useSearchProductName } from "../../../../hooks/useSearchProductName";
 import ProductCard from "../../../UI/molecules/ProductCard";
 
 function SearchResult() {
   const location = useLocation();
   const navigate = useNavigate();
   const searchProduct = location.state?.searchTerm || "";
-  const { products, isLoading, error } = useSearchProductName(searchProduct);
+  const { data: products, isLoading, error } = useSearchProductName(searchProduct);
 
   return (
     <main className="px-4 sm:px-6 md:px-10 lg:px-16 max-w-screen-2xl mx-auto">
@@ -43,10 +43,10 @@ function SearchResult() {
               py-4
             "
           >
-            {products.map((item) => (
+            {products?.map((item) => (
               <ProductCard
                 key={item._id}
-                image={item.imageUrl}
+                image={item.image}
                 nameProduct={item.name}
                 price={item.price}
                 className="min-h-[200px] p-4"

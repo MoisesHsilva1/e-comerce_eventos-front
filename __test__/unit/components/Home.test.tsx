@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Home from "../../../src/components/templates/user/home/Home";
-import useAllProducts from "../../../src/hooks/useAllProducts";
+import { useAllProducts } from "../../../src/hooks/useAllProducts";
 import { describe, it, vi, Mock, expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 

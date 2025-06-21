@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import IconUpdateFile from "../Icons/IconUploadFile";
 
 interface InputImage {
@@ -15,6 +15,7 @@ const InputImage = ({
   onImageChange,
 }: InputImage) => {
   const [image, setImage] = useState<string | undefined>(undefined);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -35,6 +36,9 @@ const InputImage = ({
   const handleRemoveImage = () => {
     setImage(undefined);
     onImageChange(null);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   const uploadImageButton = () => {
@@ -57,6 +61,7 @@ const InputImage = ({
           <input
             type="file"
             id="inputImage"
+            ref={inputRef}
             className="hidden"
             onChange={handleImageChange}
             required

@@ -3,13 +3,13 @@ import Divider from "../../../UI/atoms/Divider";
 import SortByProducts from "../../../UI/molecules/SortByProducts";
 import ProductCard from "../../../UI/molecules/ProductCard";
 import Button from "../../../UI/atoms/buttons/Button";
-import useAllProducts from "../../../../hooks/useAllProducts";
+import { useAllProducts } from "../../../../hooks/useAllProducts";
 import { useNavigate } from "react-router";
 
 function Home() {
   const [allProducts, setAllProducts] = useState(4);
   const [bestProducts, setBestProducts] = useState(4);
-  const { products, isLoading } = useAllProducts();
+  const { data: products = [], isLoading } = useAllProducts();
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Home() {
               <h1 className="text-2xl md:text-4xl font-semibold">
                 Mais vendidos
               </h1>
-              {allProducts < products.length && (
+              {allProducts < products?.length && (
                 <Button
                   textButton="Ver todos"
                   className="text-white w-32 md:w-44 h-10 mr-4 md:mr-14"
@@ -42,10 +42,10 @@ function Home() {
           </article>
           <figure className="flex flex-wrap overflow-auto gap-4 p-2 md:p-4">
             {isLoading && <h1>Carregando...</h1>}
-            {products.slice(0, bestProducts).map((item) => (
+            {products?.slice(0, bestProducts).map((item) => (
               <ProductCard
                 key={item._id}
-                image={item.imageUrl || "/placeholder.png"}
+                image={item.image || "/placeholder.png"}
                 nameProduct={item.name}
                 price={item.price}
                 onClick={() => navigate(`/produto/${item._id}`)}
@@ -63,10 +63,10 @@ function Home() {
           </article>
           <figure className="flex flex-wrap overflow-auto gap-4 p-2 md:p-4">
             {isLoading && <h1>Carregando...</h1>}
-            {products.slice(0, allProducts).map((item) => (
+            {products?.slice(0, allProducts).map((item) => (
               <ProductCard
                 key={item._id}
-                image={item.imageUrl || "/placeholder.png"}
+                image={item.image || "/placeholder.png"}
                 nameProduct={item.name}
                 price={item.price}
                 onClick={() => navigate(`/produto/${item._id}`)}

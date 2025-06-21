@@ -3,21 +3,23 @@ import { useNavigate } from "react-router";
 import IconPhoneCart from "../../../UI/atoms/Icons/IconPhoneCart";
 import Input from "../../../UI/atoms/Inputs/Input";
 import Button from "../../../UI/atoms/buttons/Button";
+import { useRegisterUser } from "../../../../hooks/useRegisterUser";
 
 interface FormState {
   name: string;
-  cpf: string;
   email: string;
   password: string;
 }
 
 function Register() {
+  const { mutate: registerUser } = useRegisterUser();
+
   const [formData, setFormData] = useState<FormState>({
     name: "",
-    cpf: "",
     email: "",
     password: "",
   });
+
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
@@ -32,9 +34,9 @@ function Register() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const { name, email, password, cpf } = formData;
+    const { name, email, password } = formData;
 
-    if (!email || !password || !name || !cpf) {
+    if (!email || !password || !name) {
       setError("Preencha todos os campos!");
       return;
     }
@@ -45,6 +47,12 @@ function Register() {
       return;
     }
 
+    const userDataRegister = {
+      name: name,
+      email: email,
+    };
+
+    registerUser(userDataRegister);
     setError("");
   };
 
@@ -74,14 +82,6 @@ function Register() {
             />
             <Input
               className="border-0 border-b-2"
-              typeInput="text"
-              name="cpf"
-              placeholder="CPF"
-              value={formData.cpf}
-              onChange={handleChange}
-            />
-            <Input
-              className="border-0 border-b-2"
               typeInput="email"
               name="email"
               placeholder="Email"
@@ -99,7 +99,7 @@ function Register() {
 
             <Button
               textButton="Criar a conta"
-              className="w-full text-white"
+              className="w-83 text-white"
               type="submit"
             />
           </form>
