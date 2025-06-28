@@ -30,7 +30,7 @@ export const productService = {
     formData.append("price", productData.price.toString());
     formData.append("image", productData.image);
 
-    const response = await api.post("/products/create", formData, {
+    const response = await api.put("/products/create", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
