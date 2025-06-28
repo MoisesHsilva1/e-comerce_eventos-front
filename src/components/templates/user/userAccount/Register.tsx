@@ -1,9 +1,10 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router";
 import IconPhoneCart from "../../../UI/atoms/Icons/IconPhoneCart";
 import Input from "../../../UI/atoms/Inputs/Input";
 import Button from "../../../UI/atoms/buttons/Button";
 import { useRegisterUser } from "../../../../hooks/useRegisterUser";
+import { ToastContainer, toast } from "react-toastify";
 
 interface FormState {
   name: string;
@@ -12,16 +13,26 @@ interface FormState {
 }
 
 function Register() {
-  const { mutate: registerUser } = useRegisterUser();
+  const { data, mutate: registerUser } = useRegisterUser();
 
   const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
     password: "",
   });
-
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      toast.success("Login Realizado com sucesso!!", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+      setFormData({ name: "", email: "", password: "" });
+    }
+  }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -102,6 +113,7 @@ function Register() {
               className="w-83 text-white"
               type="submit"
             />
+            <ToastContainer />
           </form>
 
           <p className="text-center md:text-start mt-4">
