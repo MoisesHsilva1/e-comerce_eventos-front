@@ -1,10 +1,12 @@
-import { useState, FormEvent, useEffect } from "react";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useRegisterUser } from "../../../../hooks/useRegisterUser";
+import { ToastContainer, toast } from "react-toastify";
+
 import IconPhoneCart from "../../../UI/atoms/Icons/IconPhoneCart";
 import Input from "../../../UI/atoms/Inputs/Input";
 import Button from "../../../UI/atoms/buttons/Button";
-import { useRegisterUser } from "../../../../hooks/useRegisterUser";
-import { ToastContainer, toast } from "react-toastify";
 
 interface FormState {
   name: string;
@@ -13,58 +15,38 @@ interface FormState {
 }
 
 function Register() {
-  const { data, mutate: registerUser } = useRegisterUser();
-
-  const [formData, setFormData] = useState<FormState>({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormState>();
+
+  const { data, mutate: registerUser, error } = useRegisterUser();
 
   useEffect(() => {
     if (data) {
-      toast.success("Login Realizado com sucesso!!", {
+      toast.success("Cadastro realizado com sucesso!", {
         position: "top-center",
         autoClose: 5000,
         theme: "light",
       });
-      setFormData({ name: "", email: "", password: "" });
-    }
-  }, [data]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    const { name, email, password } = formData;
-
-    if (!email || !password || !name) {
-      setError("Preencha todos os campos!");
-      return;
+      setTimeout(() => navigate("/login"), 4000);
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Email inválido!");
-      return;
+    if (error) {
+      toast.error("Usuário já existente!", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
     }
+  }, [error, data, navigate]);
 
-    const userDataRegister = {
-      name: name,
-      email: email,
-    };
-
-    registerUser(userDataRegister);
-    setError("");
+  const onSubmit = (data: FormState) => {
+    registerUser(data);
   };
 
   return (
@@ -80,33 +62,76 @@ function Register() {
           </h1>
           <p className="text-center md:text-start">Digite suas informações</p>
 
-          {error && <p className="text-red-500 text-center">{error}</p>}
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <Input
-              className="border-0 border-b-2"
-              typeInput="text"
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
+            <Controller
               name="name"
-              placeholder="Nome completo"
-              value={formData.name}
-              onChange={handleChange}
+              control={control}
+              rules={{ required: "Nome completo é obrigatório" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  className="border-0 border-b-2"
+                  typeInput="text"
+                  placeholder="Nome completo"
+                />
+              )}
             />
-            <Input
-              className="border-0 border-b-2"
-              typeInput="email"
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
+            )}
+
+            <Controller
               name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
+              control={control}
+              rules={{
+                required: "Email é obrigatório",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Email inválido",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  className="border-0 border-b-2"
+                  typeInput="email"
+                  placeholder="Email"
+                />
+              )}
             />
-            <Input
-              className="border-0 border-b-2"
-              typeInput="password"
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+
+            <Controller
               name="password"
-              placeholder="Senha"
-              value={formData.password}
-              onChange={handleChange}
+              control={control}
+              rules={{
+                required: "Senha é obrigatória",
+                maxLength: {
+                  value: 8,
+                  message: "Senha deve ter no máximo 8 caracteres",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Senha deve ter no mínimo 8 caracteres",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  className="border-0 border-b-2"
+                  typeInput="password"
+                  placeholder="Senha"
+                />
+              )}
             />
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
 
             <Button
               textButton="Criar a conta"
