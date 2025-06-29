@@ -1,6 +1,6 @@
 import { userService } from "../../services/userService";
-import { UserDto } from "../../types/interface/user/UserDto";
+import { CreateUserDto } from "../../types/interface/user/CreateUserDto";
 
-export const createUserUseCase = async (userData: UserDto) => {
-  return await userService.createUser(userData);
+export const createUserUseCase = async (userData: CreateUserDto) => {
+  return userService.createUser(userData);
 };
