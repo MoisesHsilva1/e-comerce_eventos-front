@@ -2,5 +2,5 @@ import { userService } from "../../services/userService";
 import { CreateUserDto } from "../../types/interface/user/CreateUserDto";
 
 export const createUserUseCase = async (userData: CreateUserDto) => {
-  return await userService.createUser(userData);
+  return userService.createUser(userData);
 };
