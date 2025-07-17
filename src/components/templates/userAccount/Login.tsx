@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import { useLoginUser } from "../../../../hooks/useLoginUser";
+import { useLoginUser } from "../../../hooks/useLoginUser";
 import { ToastContainer, toast } from "react-toastify";
 
-import Button from "../../../UI/atoms/buttons/Button";
-import IconPhoneCart from "../../../UI/atoms/Icons/IconPhoneCart";
-import Input from "../../../UI/atoms/Inputs/Input";
+import Button from "../../UI/atoms/buttons/Button";
+import IconPhoneCart from "../../UI/atoms/Icons/IconPhoneCart";
+import Input from "../../UI/atoms/Inputs/Input";
 
 interface FormState {
   email: string;

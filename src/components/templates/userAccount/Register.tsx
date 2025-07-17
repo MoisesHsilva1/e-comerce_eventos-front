@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { useRegisterUser } from "../../../../hooks/useRegisterUser";
+import { useRegisterUser } from "../../../hooks/useRegisterUser";
 import { ToastContainer, toast } from "react-toastify";
 
-import IconPhoneCart from "../../../UI/atoms/Icons/IconPhoneCart";
-import Input from "../../../UI/atoms/Inputs/Input";
-import Button from "../../../UI/atoms/buttons/Button";
+import IconPhoneCart from "../../UI/atoms/Icons/IconPhoneCart";
+import Input from "../../UI/atoms/Inputs/Input";
+import Button from "../../UI/atoms/buttons/Button";
 
 interface FormState {
   name: string;

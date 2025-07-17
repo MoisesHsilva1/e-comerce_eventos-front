@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router";
-import { useSearchProductName } from "../../../../hooks/useSearchProductName";
-import ProductCard from "../../../UI/molecules/ProductCard";
+import { useSearchProductName } from "../../../hooks/useSearchProductName";
+import ProductCard from "../../UI/molecules/ProductCard";
 
 function SearchResult() {
   const location = useLocation();

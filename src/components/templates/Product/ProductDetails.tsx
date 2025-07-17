@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
-import { CartContext } from "../../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 
-import { useProductID } from "../../../../hooks/useProductID";
-import ProductCardDetails from "../../../UI/molecules/ProductCardDetails";
-import SortByProducts from "../../../UI/molecules/SortByProducts";
-import ProductCard from "../../../UI/molecules/ProductCard";
-import { useAllProducts } from "../../../../hooks/useAllProducts";
+import { useProductID } from "../../../hooks/useProductID";
+import ProductCardDetails from "../../UI/molecules/ProductCardDetails";
+import SortByProducts from "../../UI/molecules/SortByProducts";
+import ProductCard from "../../UI/molecules/ProductCard";
+import { useAllProducts } from "../../../hooks/useAllProducts";
 
 function ProductDetails() {
   const params = useParams();

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Divider from "../../../UI/atoms/Divider";
-import SortByProducts from "../../../UI/molecules/SortByProducts";
-import ProductCard from "../../../UI/molecules/ProductCard";
-import Button from "../../../UI/atoms/buttons/Button";
-import { useAllProducts } from "../../../../hooks/useAllProducts";
+import Divider from "../../UI/atoms/Divider";
+import SortByProducts from "../../UI/molecules/SortByProducts";
+import ProductCard from "../../UI/molecules/ProductCard";
+import Button from "../../UI/atoms/buttons/Button";
+import { useAllProducts } from "../../../hooks/useAllProducts";
 import { useNavigate } from "react-router";
 
 function Home() {

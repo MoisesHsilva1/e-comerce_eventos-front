@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
-import { CartContext } from "../../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 import { useContext } from "react";
-import FieldCartProduct from "../../../UI/molecules/FieldCartProduct";
-import CardCartConfirmation from "../../../UI/molecules/CardCartConfirmation";
-import Input from "../../../UI/atoms/Inputs/Input";
-import Button from "../../../UI/atoms/buttons/Button";
+import FieldCartProduct from "../../UI/molecules/FieldCartProduct";
+import CardCartConfirmation from "../../UI/molecules/CardCartConfirmation";
+import Input from "../../UI/atoms/Inputs/Input";
+import Button from "../../UI/atoms/buttons/Button";
 
 function CartProducts() {
   const navigate = useNavigate();
