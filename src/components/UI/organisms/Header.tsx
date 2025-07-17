@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../atoms/Inputs/Input";
-import IconCart from "../../atoms/Icons/IconCart";
-import IconUser from "../../atoms/Icons/IconUser";
-import Divider from "../../atoms/Divider";
+import Input from "../atoms/Inputs/Input";
+import IconCart from "../atoms/Icons/IconCart";
+import IconUser from "../atoms/Icons/IconUser";
+import Divider from "../atoms/Divider";
 import { useState } from "react";
 
-function HeaderUser() {
+function Header() {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
 
@@ -60,4 +60,4 @@ function HeaderUser() {
   );
 }
 
-export default HeaderUser;
+export default Header;
