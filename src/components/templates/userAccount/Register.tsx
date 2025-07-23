@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import IconPhoneCart from "../../UI/atoms/Icons/IconPhoneCart";
 import Input from "../../UI/atoms/Inputs/Input";
 import Button from "../../UI/atoms/buttons/Button";
+import InputEye from "../../UI/atoms/Inputs/InputEye";
 
 interface FormState {
   name: string;
@@ -61,10 +62,9 @@ function Register() {
             Crie sua conta
           </h1>
           <p className="text-center md:text-start">Digite suas informações</p>
-
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-2"
           >
             <Controller
               name="name"
@@ -82,7 +82,6 @@ function Register() {
             {errors.name && (
               <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
-
             <Controller
               name="email"
               control={control}
@@ -121,7 +120,7 @@ function Register() {
                 },
               }}
               render={({ field }) => (
-                <Input
+                <InputEye
                   {...field}
                   className="border-0 border-b-2"
                   typeInput="password"
@@ -140,15 +139,15 @@ function Register() {
             />
             <ToastContainer />
           </form>
-
-          <p className="text-center md:text-start mt-4">
+          <span className="flex gap-1 text-[#7D8184] text-center md:text-start">
+            <a>Ja tem conta?</a>
             <a
-              className="text-[#7D8184] hover:text-gray-800"
               onClick={() => navigate("/login")}
+              className=" hover:text-gray-800 cursor-pointer"
             >
-              Ja tem conta? Faca login
+              Faça o login
             </a>
-          </p>
+          </span>
         </section>
       </main>
     </>

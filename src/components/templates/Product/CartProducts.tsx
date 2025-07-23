@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router";
 import { CartContext } from "../../../context/CartContext";
 import { useContext } from "react";
+import { Controller, useForm } from "react-hook-form";
 import FieldCartProduct from "../../UI/molecules/FieldCartProduct";
 import CardCartConfirmation from "../../UI/molecules/CardCartConfirmation";
 import Input from "../../UI/atoms/Inputs/Input";
 import Button from "../../UI/atoms/buttons/Button";
+
+interface ICep {
+  cep: string;
+}
 
 function CartProducts() {
   const navigate = useNavigate();
@@ -14,15 +19,17 @@ function CartProducts() {
     return cartItems.reduce((acc, item) => acc + item.price * item.qtd, 0);
   };
 
+  const {
+    control,
+    formState: { errors },
+  } = useForm<ICep>();
 
-  const total = calculatePriceTotal();
 
   return (
     <main className="p-4">
       <section className="flex justify-start items-start p-10 mx-10">
         <h1 className="text-gray-500 font-bold text-2xl">Carrinho</h1>
       </section>
-
       <section className="flex justify-center items-center">
         <article>
           {cartItems.map((item, index) => (
@@ -34,7 +41,6 @@ function CartProducts() {
               total={item.price * item.qtd}
               onClick={() => removeItem(item.id)}
             />
-
           ))}
           <div className="flex justify-between gap-2">
             <Button
@@ -50,20 +56,32 @@ function CartProducts() {
           </div>
         </article>
       </section>
-
       <section className="flex justify-between mx-8 p-10">
         <section className="flex justify-start items-start">
-          <span className="flex gap-2">
-            <Input typeInput="number" placeholder="Digite seu CEP" />
-            <Button textButton="Buscar" className="text-white" />
-          </span>
+          <form className="flex gap-2">
+            <Controller
+              name="cep"
+              control={control}
+              rules={{ required: "É necessário informar o CEP." }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  typeInput="number"
+                  placeholder="Digite seu CEP"
+                />
+              )}
+            />
+            {errors.cep && (
+              <p className="text-red-500 text-sm">{errors.cep.message}</p>
+            )}
+            <Button textButton="Buscar" type="submit" className="text-white" />
+          </form>
         </section>
-
         <section className="flex justify-end items-end">
           <CardCartConfirmation
-            subTotal={total}
+            subTotal={calculatePriceTotal()}
             delivery={0}
-            total={total}
+            total={calculatePriceTotal()}
           />
         </section>
       </section>

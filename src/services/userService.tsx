@@ -19,8 +19,6 @@ export const userService = {
 
     const idToken = await userCredential.user.getIdToken();
 
-    console.log(idToken);
-
     const response = await api.post("/auth/login", { idToken });
 
     return response.data;
