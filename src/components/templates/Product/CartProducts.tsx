@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router";
 import { CartContext } from "../../../context/CartContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
 import FieldCartProduct from "../../UI/molecules/FieldCartProduct";
 import CardCartConfirmation from "../../UI/molecules/CardCartConfirmation";
 import Input from "../../UI/atoms/Inputs/Input";
@@ -23,7 +22,6 @@ function CartProducts() {
   const {
     control,
     formState: { errors },
-    watch,
   } = useForm<ICep>();
 
 
