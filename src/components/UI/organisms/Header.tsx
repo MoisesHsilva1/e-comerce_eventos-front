@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Input from "../atoms/Inputs/Input";
 import IconCart from "../atoms/Icons/IconCart";
 import IconUser from "../atoms/Icons/IconUser";
 import Divider from "../atoms/Divider";
-import { useState } from "react";
 
 function Header() {
   const [search, setSearch] = useState<string>("");

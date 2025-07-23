@@ -2,9 +2,9 @@ import Divider from "../atoms/Divider";
 import Button from "../atoms/buttons/Button";
 
 interface CardCartDetails {
-  subTotal?: number;
-  delivery?: number;
-  total?: number;
+  subTotal: number;
+  delivery: number;
+  total: number;
 }
 
 const CardCartConfirmation = ({
@@ -33,8 +33,7 @@ const CardCartConfirmation = ({
           <p>R$ {total}</p>
         </section>
         <section className="flex justify-center items-center my-2">
-          <Button textButton="Confirmar comprar"
-          className="text-white" />
+          <Button textButton="Confirmar comprar" className="text-white" />
         </section>
       </main>
     </>

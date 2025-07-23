@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Button from "../../UI/atoms/buttons/Button";
 import IconPhoneCart from "../../UI/atoms/Icons/IconPhoneCart";
 import Input from "../../UI/atoms/Inputs/Input";
+import InputEye from "../../UI/atoms/Inputs/InputEye";
 
 interface FormState {
   email: string;
@@ -91,7 +92,7 @@ const Login = () => {
               required: "Senha é obrigatória",
             }}
             render={({ field }) => (
-              <Input
+              <InputEye
                 {...field}
                 className="border-0 border-b-2"
                 typeInput="password"
@@ -102,22 +103,22 @@ const Login = () => {
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
-
           <Button
             textButton="Login"
-            className="w-full text-white"
+            className="w-84 text-white"
             type="submit"
           />
           <ToastContainer />
         </form>
-        <p className="text-center md:text-start mt-4">
+        <span className="flex flex-rowe text-[#7D8184] gap-1 text-center md:text-start mt-4">
+          <a>Não tem uma conta? </a>
           <a
-            className="text-[#7D8184] hover:text-gray-800"
             onClick={() => navigate("/cadastro")}
+            className="hover:text-gray-800 cursor-pointer"
           >
-            Não tem uma conta? Cadastre-se aqui
+            Cadastre-se aqui
           </a>
-        </p>
+        </span>
       </section>
     </main>
   );
